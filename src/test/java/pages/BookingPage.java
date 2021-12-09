@@ -13,13 +13,13 @@ import java.util.List;
 import static java.lang.Thread.sleep;
 
 
-public class BookingPage extends BasePage{
+public class BookingPage extends BasePage {
 
     WebDriver driver;
     WebDriverWait wdWait;
 
     public BookingPage(WebDriver driver, WebDriverWait wdWait) {
-        super(driver,wdWait);
+        super(driver, wdWait);
         this.driver = driver;
         this.wdWait = wdWait;
         PageFactory.initElements(driver, this);
@@ -58,17 +58,17 @@ public class BookingPage extends BasePage{
     @FindBy(xpath = "//button[@aria-label='Jedinice: povećajte broj']")
     WebElement addRoomNo;
 
-    public void chooseLanguage(String language)  {
+    public void chooseLanguage(String language) {
         click(chooseLanguage);
         click(driver.findElement(By.xpath(languageLinkXpath.replace("$", language))));
     }
 
-    public void enterLocation(String locationValue){
+    public void enterLocation(String locationValue) {
         typeText(location, locationValue);
     }
 
 
-    public void selectDates(String startDate, String endDate){
+    public void selectDates(String startDate, String endDate) {
         click(dates);
 
         while (true) {
@@ -94,14 +94,15 @@ public class BookingPage extends BasePage{
         }
     }
 
-    public void selectFirstChildAge(String value){
-        selectByVisibleText(firstChildAgeList,value);
+    public void selectFirstChildAge(String value) {
+        selectByVisibleText(firstChildAgeList, value);
     }
-    public void clickSearchButton(){
+
+    public void clickSearchButton() {
         click(searchButton);
     }
 
-    public void guestsInput()  {
+    public void guestsInput() {
         click(guestsNo);
         click(addChildren);
         click(firstChildAgeList);

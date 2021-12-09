@@ -24,7 +24,7 @@ public class BasePage {
         PageFactory.initElements(driver, this);
     }
 
-    public void typeText(WebElement element, String text){
+    public void typeText(WebElement element, String text) {
         wait = new WebDriverWait(driver, Integer.parseInt(WAIT));
 
         wait.until(ExpectedConditions.visibilityOf(element));
@@ -32,16 +32,16 @@ public class BasePage {
 
         try {
 
-            if(text != null) {
+            if (text != null) {
                 element.clear();
                 element.sendKeys(text);
             } else {
                 System.out.println("Parameter was null!");
             }
 
-        }catch (StaleElementReferenceException e){
+        } catch (StaleElementReferenceException e) {
 
-            if(text != null) {
+            if (text != null) {
                 element.clear();
                 element.sendKeys(text);
             } else {
@@ -50,7 +50,8 @@ public class BasePage {
 
         }
     }
-    public void click(WebElement element){
+
+    public void click(WebElement element) {
         wait = new WebDriverWait(driver, Integer.parseInt(WAIT));
 
         wait.until(ExpectedConditions.visibilityOf(element));
@@ -61,50 +62,53 @@ public class BasePage {
             actions.moveToElement(element).build().perform();
 
             element.click();
-        }catch (StaleElementReferenceException e){
+        } catch (StaleElementReferenceException e) {
             Actions actions = new Actions(driver);
             actions.moveToElement(element).build().perform();
 
             element.click();
         }
     }
-    public void selectByVisibleText(WebElement element, String value){
+
+    public void selectByVisibleText(WebElement element, String value) {
         try {
-            if (value!=null) {
+            if (value != null) {
                 Select subjectHeadingSelect = new Select(element);
                 subjectHeadingSelect.selectByVisibleText(value);
-            }else{
+            } else {
                 System.out.println("Parameter was null!");
             }
-        }catch (StaleElementReferenceException e){
-            if (value!=null) {
+        } catch (StaleElementReferenceException e) {
+            if (value != null) {
                 Select subjectHeadingSelect = new Select(element);
                 subjectHeadingSelect.selectByVisibleText(value);
-            }else{
+            } else {
                 System.out.println("Parameter was null!");
             }
         }
 
     }
-    public void selectByValue(WebElement element, String value){
+
+    public void selectByValue(WebElement element, String value) {
         try {
-            if (value!=null) {
+            if (value != null) {
                 Select subjectHeadingSelect = new Select(element);
                 subjectHeadingSelect.selectByValue(value);
-            }else{
+            } else {
                 System.out.println("Parameter was null!");
             }
-        }catch (StaleElementReferenceException e){
-            if (value!=null) {
+        } catch (StaleElementReferenceException e) {
+            if (value != null) {
                 Select subjectHeadingSelect = new Select(element);
                 subjectHeadingSelect.selectByValue(value);
-            }else{
+            } else {
                 System.out.println("Parameter was null!");
             }
         }
 
     }
-    public void assertEquals(WebElement element, String expectedValue){
+
+    public void assertEqualsGetText(WebElement element, String expectedValue) {
         wait = new WebDriverWait(driver, Integer.parseInt(WAIT));
 
         wait.until(ExpectedConditions.visibilityOf(element));
@@ -112,15 +116,30 @@ public class BasePage {
 
         try {
             Assert.assertEquals(element.getText(), expectedValue);
-        }catch (StaleElementReferenceException e){
+        } catch (StaleElementReferenceException e) {
             Assert.assertEquals(element.getText(), expectedValue);
         }
     }
-    public void takeScreenshot(String fileName) throws IOException {
-        File file = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-        FileUtils.copyFile(file, new File("src/screenshot/"+fileName+"_"+System.currentTimeMillis()+".png"));
+
+    public void assertEqualsGetAtribute(WebElement element, String atribute, String expectedValue) {
+        wait = new WebDriverWait(driver, Integer.parseInt(WAIT));
+
+        wait.until(ExpectedConditions.visibilityOf(element));
+        wait.until(ExpectedConditions.elementToBeClickable(element));
+
+        try {
+            Assert.assertEquals(element.getAttribute(atribute), expectedValue);
+        } catch (StaleElementReferenceException e) {
+            Assert.assertEquals(element.getAttribute(atribute), expectedValue);
+        }
     }
-    public void scrollToWebElement(WebElement element){
+
+    public void takeScreenshot(String fileName) throws IOException {
+        File file = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        FileUtils.copyFile(file, new File("src/screenshot/" + fileName + "_" + System.currentTimeMillis() + ".png"));
+    }
+
+    public void scrollToWebElement(WebElement element) {
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true)", element);
     }
 }

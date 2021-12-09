@@ -4,8 +4,11 @@ import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
+import org.openqa.selenium.By;
+import org.testng.Assert;
 import pages.BookingPage;
 import pages.HomePage;
+import pages.SearchResultsPage;
 import tests.BaseTest;
 
 import java.io.IOException;
@@ -56,5 +59,29 @@ public class TestingSteps extends BaseTest {
     public void iAddGuestsNumber() {
         BookingPage bookingPage = new BookingPage(driver, wdWait);
         bookingPage.guestsInput();
+    }
+
+    @And("I choose apartment")
+    public void iChooseApartment() {
+        SearchResultsPage searchResultsPage = new SearchResultsPage(driver, wdWait);
+        searchResultsPage.chooseApartment();
+    }
+
+    @And("^I verify that for atribute (.*) location (.*)$")
+    public void iVerifyLocation(String atribute, String location) {
+        SearchResultsPage searchResultsPage = new SearchResultsPage(driver, wdWait);
+        searchResultsPage.checkLocation(atribute, location);
+    }
+
+    @And("^I verify dates from (.*) to (.*)$")
+    public void iVerifyDates(String dateFrom, String dateTo) {
+        SearchResultsPage searchResultsPage = new SearchResultsPage(driver, wdWait);
+        searchResultsPage.checkDates(dateFrom, dateTo);
+    }
+
+    @And("I verify adultCount (.*), childrenCount (.*), roomCount (.*)$")
+    public void iVerifyPersonRooomCount(String adultCount, String childrenCount, String roomCount) {
+        SearchResultsPage searchResultsPage = new SearchResultsPage(driver, wdWait);
+        searchResultsPage.checkPersonRooomCount(adultCount, childrenCount, roomCount);
     }
 }

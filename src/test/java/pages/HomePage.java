@@ -12,12 +12,11 @@ public class HomePage extends BasePage {
     WebDriverWait wdWait;
 
     public HomePage(WebDriver driver, WebDriverWait wdWait) {
-        super(driver,wdWait);
+        super(driver, wdWait);
         this.driver = driver;
         this.wdWait = wdWait;
         PageFactory.initElements(driver, this);
     }
-
 
 
 }
