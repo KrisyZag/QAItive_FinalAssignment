@@ -4,10 +4,8 @@ import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
-import org.openqa.selenium.By;
-import org.testng.Assert;
+import pages.ApartmentPage;
 import pages.BookingPage;
-import pages.HomePage;
 import pages.SearchResultsPage;
 import tests.BaseTest;
 
@@ -55,16 +53,16 @@ public class TestingSteps extends BaseTest {
         bookingPage.clickSearchButton();
     }
 
-    @And("I add guests number")
-    public void iAddGuestsNumber() {
+    @And("I add guests with child age (.*)$")
+    public void iAddGuestsNumber(String childAge) {
         BookingPage bookingPage = new BookingPage(driver, wdWait);
-        bookingPage.guestsInput();
+        bookingPage.guestsInput(childAge);
     }
 
-    @And("I choose apartment")
-    public void iChooseApartment() {
+    @And("^I choose apartment (.*)$")
+    public void iChooseApartment(String apartment) {
         SearchResultsPage searchResultsPage = new SearchResultsPage(driver, wdWait);
-        searchResultsPage.chooseApartment();
+        searchResultsPage.chooseApartment(apartment);
     }
 
     @And("^I verify that for atribute (.*) location (.*)$")
@@ -83,5 +81,11 @@ public class TestingSteps extends BaseTest {
     public void iVerifyPersonRooomCount(String adultCount, String childrenCount, String roomCount) {
         SearchResultsPage searchResultsPage = new SearchResultsPage(driver, wdWait);
         searchResultsPage.checkPersonRooomCount(adultCount, childrenCount, roomCount);
+    }
+
+    @And("^I checked header in new tab (.*)$")
+    public void iCheckedDataInNewTab(String apartmentHeader) {
+        ApartmentPage apartmentPage = new ApartmentPage(driver, wdWait);
+        apartmentPage.getWidowData(apartmentHeader);
     }
 }

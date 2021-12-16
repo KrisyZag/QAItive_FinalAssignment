@@ -3,14 +3,11 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
-
-import static java.lang.Thread.sleep;
 
 
 public class BookingPage extends BasePage {
@@ -36,7 +33,6 @@ public class BookingPage extends BasePage {
     @FindBy(css = ".xp__dates.xp__group")
     WebElement dates;
 
-
     @FindBy(xpath = "//div[@data-bui-ref='calendar-next']")
     WebElement next;
 
@@ -52,9 +48,6 @@ public class BookingPage extends BasePage {
     @FindBy(xpath = "//select[@aria-label ='Uzrast deteta 1']")
     WebElement firstChildAgeList;
 
-    @FindBy(xpath = "//*[contains(text(), '5 godina')]")
-    WebElement firstChildAge;
-
     @FindBy(xpath = "//button[@aria-label='Jedinice: povećajte broj']")
     WebElement addRoomNo;
 
@@ -66,7 +59,6 @@ public class BookingPage extends BasePage {
     public void enterLocation(String locationValue) {
         typeText(location, locationValue);
     }
-
 
     public void selectDates(String startDate, String endDate) {
         click(dates);
@@ -102,14 +94,11 @@ public class BookingPage extends BasePage {
         click(searchButton);
     }
 
-    public void guestsInput() {
+    public void guestsInput(String firstChildAge) {
         click(guestsNo);
         click(addChildren);
         click(firstChildAgeList);
-        selectFirstChildAge("5 godina");
+        selectFirstChildAge(firstChildAge);
         click(addRoomNo);
-
-
     }
-
 }

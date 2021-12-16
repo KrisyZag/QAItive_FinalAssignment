@@ -1,5 +1,6 @@
 package pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -36,11 +37,10 @@ public class SearchResultsPage extends BasePage {
     @FindBy(css = "#ss")
     WebElement location;
 
-    @FindBy(xpath = "//a[contains(@href, 'apartments-dm')]//span[contains(text(), 'Prikaži raspoloživost')]")
-    WebElement selectApartment;
+    String selectApartment = "//a[@role = 'button' and contains(@href, '$')]";
 
-    public void chooseApartment() {
-        click(selectApartment);
+    public void chooseApartment(String apartment) {
+        click(driver.findElement(By.xpath(selectApartment.replace("$", apartment))));
     }
 
     public void checkLocation(String atribute, String reserveLocation) {
